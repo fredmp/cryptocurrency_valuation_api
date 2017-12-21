@@ -8,7 +8,7 @@ development:
   <<: *default
   database: crypto_currency_valuation_development
 
-development:
+test:
   <<: *default
   database: crypto_currency_valuation_test
 
