@@ -12,6 +12,7 @@ gem 'puma', '~> 3.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'pg'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -26,4 +27,5 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'bundler-audit'
   gem 'brakeman'
+  gem 'annotate'
 end
