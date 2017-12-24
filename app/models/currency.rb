@@ -13,7 +13,7 @@
 #
 
 class Currency < ApplicationRecord
-  has_many :updates, class_name: 'CurrencyUpdate', foreign_key: 'currency_id'
+  has_many :updates, class_name: 'CurrencyUpdate', foreign_key: 'currency_id', dependent: :destroy
 
   [
     :rank,
@@ -39,12 +39,12 @@ class Currency < ApplicationRecord
   end
 
   def max_price
-    @max_price ||= if (max_supply.nil? && total_supply.nil?) ||
+    @max_price ||= if (max_supply.nil? && total_supply.nil? && available_supply.nil?) ||
                       reference_price.nil? || reference_max_supply.nil? ||
                       reference_price == price && reference_max_supply == (max_supply || total_supply)
       price
     else
-      reference_price / ((max_supply || total_supply) / reference_max_supply)
+      reference_price / ((max_supply || total_supply || available_supply) / reference_max_supply)
     end.to_f.round(2)
   end
 

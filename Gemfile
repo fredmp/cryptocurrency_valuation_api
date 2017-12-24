@@ -19,6 +19,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'awesome_print'
   gem 'pry-byebug'
+  gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
 end
 
 group :development do
