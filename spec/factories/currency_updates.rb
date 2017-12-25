@@ -3,7 +3,7 @@ FactoryBot.define do
     factory :update_btc do
       rank 1
       price 20_000
-      volume_24h 200_000_000
+      volume_24h 10_574_600_000
       market_cap 200_000_000_000
       percent_change_1h 20.2
       percent_change_24h 14.2
@@ -18,7 +18,7 @@ FactoryBot.define do
     factory :update_ltc do
       rank 5
       price 280
-      volume_24h 8_000_000
+      volume_24h 99_000_000
       market_cap 20_000_000
       percent_change_1h 8.2
       percent_change_24h 2.2
@@ -33,7 +33,7 @@ FactoryBot.define do
     factory :update_eth do
       rank 2
       price 500
-      volume_24h 99_000_000
+      volume_24h 2_459_250_000
       market_cap 99_000_000
       percent_change_1h 9.2
       percent_change_24h 22

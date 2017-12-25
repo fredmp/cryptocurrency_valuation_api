@@ -42,7 +42,7 @@ RSpec.describe Currency, type: :model do
 
   describe '#fair_price' do
     it 'returns a suggestion of fair price based on max price, volume and whether it is inflationary or not' do
-      expect(create(:eth).fair_price).to eq(4200)
+      expect(create(:eth).fair_price).to eq(5250)
     end
   end
 
@@ -55,7 +55,13 @@ RSpec.describe Currency, type: :model do
 
   describe '#liquidity' do
     it 'returns a hash with description and penalty based on the volume transactioned in the last 24h' do
-      expect(create(:eth).liquidity).to eq({ description: 'Medium', penalty: 2 })
+      expect(create(:eth).liquidity).to eq({ description: 'Very High', penalty: 0 })
+    end
+  end
+
+  describe '#growth_potential' do
+    it 'returns a percentage based on the difference between current price and fair price' do
+      expect(create(:eth).growth_potential).to eq(950)
     end
   end
 end

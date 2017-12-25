@@ -15,7 +15,8 @@ class CurrencySerializer < ActiveModel::Serializer
     :max_price,
     :fair_price,
     :liquidity,
-    :inflationary
+    :inflationary,
+    :growth_potential
   )
 
   def liquidity

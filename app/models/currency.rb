@@ -34,6 +34,10 @@ class Currency < ApplicationRecord
     end
   end
 
+  def growth_potential
+    ((fair_price - price) / price * 100).to_f.round(2)
+  end
+
   def fair_price
     @fair_price ||= max_price * (inflationary? ? 0.50 : 1) * ((10 - liquidity[:penalty]) / 10.0)
   end
@@ -56,9 +60,9 @@ class Currency < ApplicationRecord
     @liquidity ||= case volume_24h
     when volume_24h.nil? || volume_24h < 0
       return { description: 'None', penalty: 5 }
-    when 0..5_000_000
+    when 0..1_000_000
       return { description: 'Very Low', penalty: 4 }
-    when 5_000_001..10_000_000
+    when 1_000_001..10_000_000
       return { description: 'Low', penalty: 3 }
     when 10_000_001..100_000_000
       return { description: 'Medium', penalty: 2 }
