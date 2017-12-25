@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171223194315) do
+ActiveRecord::Schema.define(version: 20171225204658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20171223194315) do
     t.decimal "reference_market_cap", precision: 15, scale: 2
     t.decimal "reference_max_supply", precision: 15, scale: 2
     t.index ["currency_id"], name: "index_currency_updates_on_currency_id"
+  end
+
+  create_table "valuation_settings", force: :cascade do |t|
+    t.string "description"
+    t.integer "from"
+    t.integer "to"
+    t.decimal "weight", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "currency_updates", "currencies"

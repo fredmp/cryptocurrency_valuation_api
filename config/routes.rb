@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  get 'currencies', to: 'currencies#index'
-  get 'status', to: 'status#index'
+  resources :valuation_settings, only: [:index, :create, :destroy], path: 'valuation-settings'
+  resources :currencies, only: [:index]
+  resources :status, only: [:index]
 end
