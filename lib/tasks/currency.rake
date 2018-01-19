@@ -5,7 +5,7 @@ require 'uri'
 namespace :currency do
   desc 'This task fetches all currencies'
   task :fetch_all => :environment do
-    url = 'https://api.coinmarketcap.com/v1/ticker/?limit=50'
+    url = 'https://api.coinmarketcap.com/v1/ticker/?limit=150'
     uri = URI(url)
     response = Net::HTTP.get(uri)
     result = JSON.parse(response)
