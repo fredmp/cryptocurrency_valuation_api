@@ -6,7 +6,7 @@
 #  external_id  :string
 #  name         :string
 #  symbol       :string
-#  max_supply   :decimal(15, 2)
+#  max_supply   :decimal(25, 2)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  last_updated :integer

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171225204658) do
+ActiveRecord::Schema.define(version: 20180107122202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20171225204658) do
     t.string "external_id"
     t.string "name"
     t.string "symbol"
-    t.decimal "max_supply", precision: 15, scale: 2
+    t.decimal "max_supply", precision: 25, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "last_updated"
@@ -27,20 +27,20 @@ ActiveRecord::Schema.define(version: 20171225204658) do
 
   create_table "currency_updates", force: :cascade do |t|
     t.integer "rank"
-    t.decimal "price", precision: 15, scale: 2
-    t.decimal "volume_24h", precision: 15, scale: 2
-    t.decimal "market_cap", precision: 15, scale: 2
+    t.decimal "price", precision: 25, scale: 2
+    t.decimal "volume_24h", precision: 25, scale: 2
+    t.decimal "market_cap", precision: 25, scale: 2
     t.decimal "percent_change_1h"
     t.decimal "percent_change_24h"
     t.decimal "percent_change_7d"
     t.bigint "currency_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_supply", precision: 15, scale: 2
-    t.decimal "available_supply", precision: 15, scale: 2
-    t.decimal "reference_price", precision: 15, scale: 2
-    t.decimal "reference_market_cap", precision: 15, scale: 2
-    t.decimal "reference_max_supply", precision: 15, scale: 2
+    t.decimal "total_supply", precision: 25, scale: 2
+    t.decimal "available_supply", precision: 25, scale: 2
+    t.decimal "reference_price", precision: 25, scale: 2
+    t.decimal "reference_market_cap", precision: 25, scale: 2
+    t.decimal "reference_max_supply", precision: 25, scale: 2
     t.index ["currency_id"], name: "index_currency_updates_on_currency_id"
   end
 

@@ -4,20 +4,20 @@
 #
 #  id                   :integer          not null, primary key
 #  rank                 :integer
-#  price                :decimal(15, 2)
-#  volume_24h           :decimal(15, 2)
-#  market_cap           :decimal(15, 2)
+#  price                :decimal(25, 2)
+#  volume_24h           :decimal(25, 2)
+#  market_cap           :decimal(25, 2)
 #  percent_change_1h    :decimal(, )
 #  percent_change_24h   :decimal(, )
 #  percent_change_7d    :decimal(, )
 #  currency_id          :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  total_supply         :decimal(15, 2)
-#  available_supply     :decimal(15, 2)
-#  reference_price      :decimal(15, 2)
-#  reference_market_cap :decimal(15, 2)
-#  reference_max_supply :decimal(15, 2)
+#  total_supply         :decimal(25, 2)
+#  available_supply     :decimal(25, 2)
+#  reference_price      :decimal(25, 2)
+#  reference_market_cap :decimal(25, 2)
+#  reference_max_supply :decimal(25, 2)
 #
 # Indexes
 #
