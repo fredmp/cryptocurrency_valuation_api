@@ -13,6 +13,15 @@ class ValuationSettingsController < ApplicationController
     end
   end
 
+  def update
+    valuation_setting = ValuationSetting.find(params[:id])
+    if valuation_setting.update(valuation_setting_params)
+      render json: valuation_setting, status: :ok
+    else
+      render json: valuation_setting.errors, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     begin
       valuation_setting = ValuationSetting.find(params[:id])
