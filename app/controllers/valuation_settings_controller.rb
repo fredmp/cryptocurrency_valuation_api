@@ -26,6 +26,6 @@ class ValuationSettingsController < ApplicationController
   private
 
   def valuation_setting_params
-    params.require(:valuation_setting).permit(:description, :from, :to, :weight)
+    params.require(:valuation_setting).permit(:description, :max_value, :weight)
   end
 end
