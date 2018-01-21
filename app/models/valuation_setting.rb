@@ -8,10 +8,11 @@
 #  weight      :decimal(8, 2)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  name        :string
 #
 
 class ValuationSetting < ApplicationRecord
-  validates :description, :max_value, :weight, presence: true
+  validates :name, :max_value, :weight, presence: true
   validates :max_value, inclusion: { in: 1..10 }
   validates :weight, numericality: true
 end
