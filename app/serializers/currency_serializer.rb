@@ -1,5 +1,6 @@
 class CurrencySerializer < ActiveModel::Serializer
   attributes(
+    :id,
     :rank,
     :symbol,
     :name,
