@@ -23,6 +23,20 @@ class TrackedCurrenciesController < ApplicationController
   end
 
   def update
+    unless currency
+      render json: { message: "#{params['symbol']} does not exist" }, status: :bad_request
+      return
+    end
+    unless tracked_currency
+      render json: { message: "#{params['symbol']} is not tracked" }, status: :bad_request
+      return
+    end
+
+    if tracked_currency.update_attribute(:notes, params[:notes])
+      render json: tracked_currency, status: :ok
+    else
+      render json: tracked_currency.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy

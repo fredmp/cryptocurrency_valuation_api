@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124013333) do
+ActiveRecord::Schema.define(version: 20180124213804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180124013333) do
 
   create_table "tracked_currencies", force: :cascade do |t|
     t.bigint "currency_id"
+    t.string "notes"
     t.index ["currency_id"], name: "index_tracked_currencies_on_currency_id"
   end
 

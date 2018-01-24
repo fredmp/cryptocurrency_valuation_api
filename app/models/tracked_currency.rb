@@ -4,6 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  currency_id :integer
+#  notes       :string
 #
 # Indexes
 #
