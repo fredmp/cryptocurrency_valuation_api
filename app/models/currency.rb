@@ -35,11 +35,7 @@ class Currency < ApplicationRecord
   end
 
   def growth_potential
-    ((fair_price - price) / price * 100).to_f.round(2)
-  end
-
-  def fair_price
-    @fair_price ||= max_price * (inflationary? ? 0.50 : 1) * ((10 - liquidity[:penalty]) / 10.0)
+    ((max_price - price) / price * 100).to_f.round(2)
   end
 
   def max_price

@@ -4,8 +4,8 @@ RSpec.describe CurrenciesController, type: :controller do
 
   describe "GET #index" do
     it "returns http 200 and stored currencies" do
-      create(:btc)
-      create(:eth)
+      btc = create(:btc)
+      eth = create(:eth)
       get :index
       expect(response).to have_http_status(:success)
       expect(
@@ -13,6 +13,7 @@ RSpec.describe CurrenciesController, type: :controller do
       ).to eq(
         [
           {
+            "id" => btc.id,
             "rank" => 1,
             "symbol" => "BTC",
             "name" => "Bitcoin",
@@ -26,12 +27,12 @@ RSpec.describe CurrenciesController, type: :controller do
             "availableSupply" => "14000000.0",
             "maxSupply" => "21000000.0",
             "maxPrice" => 20000.0,
-            "fairPrice" => 20000.0,
             "liquidity" => "Very High",
             "inflationary" => false,
             "growthPotential" => 0.0
           },
           {
+            "id" => eth.id,
             "rank" => 2,
             "symbol" => "ETH",
             "name" => "Ethereum",
@@ -45,10 +46,9 @@ RSpec.describe CurrenciesController, type: :controller do
             "availableSupply" => "40000000.0",
             "maxSupply" => nil,
             "maxPrice" => 10500.0,
-            "fairPrice" => 5250.0,
             "liquidity" => "Very High",
             "inflationary" => true,
-            "growthPotential" => 950.0
+            "growthPotential" => 2000.0
           }
         ].to_json
       )

@@ -13,8 +13,7 @@ class TrackedCurrenciesController < ApplicationController
       return
     end
 
-    binding.pry
-    valuations = ValuationSetting.all.map { |vs| Valuation.new(valuation_setting: vs) }
+    valuations = ValuationSetting.all.map { |vs| Valuation.new(valuation_setting: vs, value: 0) }
     tracked = TrackedCurrency.new(currency: currency, valuations: valuations)
     if tracked.save
       render json: tracked, status: :created

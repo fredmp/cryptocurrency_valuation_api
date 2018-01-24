@@ -40,12 +40,6 @@ RSpec.describe Currency, type: :model do
     end
   end
 
-  describe '#fair_price' do
-    it 'returns a suggestion of fair price based on max price, volume and whether it is inflationary or not' do
-      expect(create(:eth).fair_price).to eq(5250)
-    end
-  end
-
   describe '#inflationary?' do
     it 'assumes a currency is inflationary whether it has max_supply' do
       expect(create(:eth).inflationary?).to be true
@@ -61,7 +55,7 @@ RSpec.describe Currency, type: :model do
 
   describe '#growth_potential' do
     it 'returns a percentage based on the difference between current price and fair price' do
-      expect(create(:eth).growth_potential).to eq(950)
+      expect(create(:eth).growth_potential).to eq(2000)
     end
   end
 end

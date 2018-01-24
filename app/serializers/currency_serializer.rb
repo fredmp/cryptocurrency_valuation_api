@@ -14,7 +14,6 @@ class CurrencySerializer < ActiveModel::Serializer
     :available_supply,
     :max_supply,
     :max_price,
-    :fair_price,
     :liquidity,
     :inflationary,
     :growth_potential
