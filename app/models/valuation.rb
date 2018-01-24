@@ -21,4 +21,16 @@
 class Valuation < ApplicationRecord
   belongs_to :tracked_currency
   belongs_to :valuation_setting
+
+  def quota
+    valuation_setting.weight * tracked_currency.total_quota
+  end
+
+  def max_value
+    valuation_setting.max_value
+  end
+
+  def penalty
+    1.0 - (value.to_f / max_value.to_f)
+  end
 end

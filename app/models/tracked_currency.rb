@@ -19,19 +19,41 @@ class TrackedCurrency < ApplicationRecord
   has_many :valuations
 
   def expected_price
-    total_weight = ValuationSetting.all.sum(&:weight)
-    return currency.price if total_weight == 0 || valuations.sum(&:value) == 0
-    total_quota = currency.max_price / total_weight
-    expected = valuations.inject(currency.max_price) do |accumulator, valuation|
-      valuation_quota = valuation.valuation_setting.weight * total_quota
-      valuation_percentage = (1.0 - (valuation.value.to_f / valuation.valuation_setting.max_value.to_f)).round(2)
-      accumulator -= valuation_quota * valuation_percentage
+    return currency.price if zero_weight_in_settings || zero_weight_in_valuations
+
+    evaluated_max_price = currency.max_price * (total_weight / 100)
+    not_affected_max_price = currency.max_price * (remaining_weight / 100)
+
+    expected = valuations.inject(evaluated_max_price) do |accumulator, valuation|
+      accumulator -= valuation.quota * valuation.penalty
     end
-    [0, expected].max.to_f.round(4)
+    [0, expected + not_affected_max_price].max.to_f.round(4)
   end
 
   def expected_growth
     return 0 if expected_price == currency.price
     ((expected_price - currency.price) / currency.price * 100).to_f.round(2)
+  end
+
+  def total_quota
+    currency.max_price / total_weight
+  end
+
+  private
+
+  def zero_weight_in_settings
+    total_weight == 0
+  end
+
+  def zero_weight_in_valuations
+    valuations.sum(&:value) == 0
+  end
+
+  def remaining_weight
+    100 - total_weight
+  end
+
+  def total_weight
+    @total_weight ||= ValuationSetting.all.sum(&:weight)
   end
 end
