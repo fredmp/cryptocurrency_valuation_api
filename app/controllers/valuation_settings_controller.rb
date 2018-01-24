@@ -7,6 +7,11 @@ class ValuationSettingsController < ApplicationController
   def create
     valuation_setting = ValuationSetting.new(valuation_setting_params)
     if valuation_setting.save
+
+      TrackedCurrency.all.each do |t|
+        t.valuations.create(value: 0, valuation_setting: valuation_setting)
+      end
+
       render json: valuation_setting, status: :created
     else
       render json: valuation_setting.errors, status: :unprocessable_entity

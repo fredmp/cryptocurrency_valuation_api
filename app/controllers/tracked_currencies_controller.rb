@@ -26,6 +26,17 @@ class TrackedCurrenciesController < ApplicationController
   end
 
   def destroy
+    unless currency
+      render json: { message: "#{params['symbol']} does not exist" }, status: :bad_request
+      return
+    end
+    unless tracked_currency
+      render json: { message: "#{params['symbol']} is not tracked" }, status: :bad_request
+      return
+    end
+
+    tracked_currency.destroy
+    head :no_content
   end
 
   def ids

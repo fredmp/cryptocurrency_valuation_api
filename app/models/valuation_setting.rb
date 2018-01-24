@@ -15,4 +15,6 @@ class ValuationSetting < ApplicationRecord
   validates :name, :max_value, :weight, presence: true
   validates :max_value, inclusion: { in: 1..10 }
   validates :weight, numericality: true
+
+  has_many :valuations, dependent: :destroy
 end

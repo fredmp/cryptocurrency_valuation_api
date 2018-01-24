@@ -16,7 +16,7 @@
 
 class TrackedCurrency < ApplicationRecord
   belongs_to :currency
-  has_many :valuations
+  has_many :valuations, dependent: :destroy
 
   def expected_price
     return currency.price if zero_weight_in_settings || zero_weight_in_valuations
