@@ -16,4 +16,5 @@
 
 class TrackedCurrency < ApplicationRecord
   belongs_to :currency
+  has_many :valuations
 end

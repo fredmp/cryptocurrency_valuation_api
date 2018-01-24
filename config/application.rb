@@ -31,5 +31,6 @@ module CryptoCurrencyValuationApi
     config.api_only = true
 
     ActiveModel::Serializer.config.key_transform = :camel_lower
+    ActiveModel::Serializer.config.default_includes = "**"
   end
 end

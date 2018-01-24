@@ -12,7 +12,10 @@ class TrackedCurrenciesController < ApplicationController
       render json: { message: "#{params['symbol']} is already tracked" }, status: :bad_request
       return
     end
-    tracked = TrackedCurrency.new(currency: currency)
+
+    binding.pry
+    valuations = ValuationSetting.all.map { |vs| Valuation.new(valuation_setting: vs) }
+    tracked = TrackedCurrency.new(currency: currency, valuations: valuations)
     if tracked.save
       render json: tracked, status: :created
     else

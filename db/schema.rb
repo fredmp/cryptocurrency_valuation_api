@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122174707) do
+ActiveRecord::Schema.define(version: 20180124013333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,10 +61,13 @@ ActiveRecord::Schema.define(version: 20180122174707) do
   create_table "valuations", force: :cascade do |t|
     t.bigint "tracked_currency_id"
     t.integer "value"
+    t.bigint "valuation_setting_id"
     t.index ["tracked_currency_id"], name: "index_valuations_on_tracked_currency_id"
+    t.index ["valuation_setting_id"], name: "index_valuations_on_valuation_setting_id"
   end
 
   add_foreign_key "currency_updates", "currencies"
   add_foreign_key "tracked_currencies", "currencies"
   add_foreign_key "valuations", "tracked_currencies"
+  add_foreign_key "valuations", "valuation_settings"
 end
