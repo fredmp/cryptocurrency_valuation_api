@@ -23,6 +23,37 @@ class AssetsController < ApplicationController
     end
   end
 
+  def update
+    unless currency
+      render json: { message: "#{params['symbol']} does not exist" }, status: :bad_request
+      return
+    end
+    unless asset
+      render json: { message: "Asset for #{params['symbol']} does not exist" }, status: :bad_request
+      return
+    end
+
+    if asset.update_attribute(:amount, params[:amount])
+      render json: asset, status: :ok
+    else
+      render json: asset.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    unless currency
+      render json: { message: "#{params['symbol']} does not exist" }, status: :bad_request
+      return
+    end
+    unless asset
+      render json: { message: "Asset for #{params['symbol']} does not exist" }, status: :bad_request
+      return
+    end
+
+    asset.destroy
+    head :no_content
+  end
+
   private
 
   def currency
