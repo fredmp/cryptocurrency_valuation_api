@@ -9,6 +9,7 @@
 #  updated_at      :datetime         not null
 #  name            :string
 #  local_currency  :string
+#  token           :string
 #
 # Indexes
 #

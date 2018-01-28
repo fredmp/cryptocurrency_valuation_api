@@ -1,6 +1,6 @@
-class LoginController < ApplicationController
+class AuthController < ApplicationController
 
-  skip_before_action :authenticate!
+  skip_before_action :authenticate!, only: ['create']
 
   def create
     user = User.find_by(email: params[:email])
@@ -11,5 +11,10 @@ class LoginController < ApplicationController
     else
       render json: { message: 'Invalid credentials' }, status: :unauthorized
     end
+  end
+
+  def destroy
+    current_user.update_attribute(:token, nil)
+    set_current_user(nil)
   end
 end

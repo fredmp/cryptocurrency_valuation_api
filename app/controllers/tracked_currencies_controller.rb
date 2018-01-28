@@ -60,10 +60,10 @@ class TrackedCurrenciesController < ApplicationController
   private
 
   def currency
-    Currency.find_by(symbol: params['symbol'])
+    @currency ||= Currency.find_by(symbol: params['symbol'])
   end
 
   def tracked_currency
-    TrackedCurrency.find_by(currency: currency)
+    @tracked_currency ||= TrackedCurrency.find_by(currency: currency)
   end
 end

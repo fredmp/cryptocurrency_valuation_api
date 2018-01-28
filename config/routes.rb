@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :valuations, only: [:update]
   resources :currencies, only: [:index]
   resources :status, only: [:index]
-  resources :login, only: [:create]
   resources :users, only: [:create, :update]
+
+  post 'login', to: 'auth#create', as: :login
+  get 'logout', to: 'auth#destroy', as: :logout
 end

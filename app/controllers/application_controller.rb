@@ -10,7 +10,11 @@ class ApplicationController < ActionController::API
   end
 
   def set_authentiation_header!
-    response.headers['Authorization'] = JsonWebToken.encode(current_user) if current_user
+    if current_user
+      token = JsonWebToken.encode(current_user)
+      current_user.update_attribute(:token, token)
+      response.headers['Authorization'] = token
+    end
   end
 
   def decoded_auth_token
@@ -18,10 +22,16 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    @current_user ||= (User.find(decoded_auth_token[:user_id]) if decoded_auth_token)
+    return @current_user if @current_user
+    user = User.find(decoded_auth_token[:user_id]) if decoded_auth_token
+    @current_user = user if user && valid_token?(user)
   end
 
   def set_current_user(user)
     @current_user = user
+  end
+
+  def valid_token?(user)
+    user.token == request.headers['Authorization']
   end
 end

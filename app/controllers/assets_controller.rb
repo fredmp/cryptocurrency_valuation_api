@@ -57,10 +57,10 @@ class AssetsController < ApplicationController
   private
 
   def currency
-    Currency.find_by(symbol: params['symbol'])
+    @currency ||= Currency.find_by(symbol: params['symbol'])
   end
 
   def asset
-    Asset.find_by(currency: currency)
+    @asset ||= Asset.find_by(currency: currency)
   end
 end

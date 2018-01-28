@@ -23,11 +23,17 @@ class UsersController < ApplicationController
       return
     end
 
-    if user_params[:password] && !user.authenticate(user_params[:password])
+    if params[:password] && !user.authenticate(params[:current_password])
       render json: { message: 'Invalid password' }, status: :unauthorized
+      return
     end
 
-    if user.update_attributes(user_params)
+    user.name = user_params[:name] if user_params[:name]
+    user.email = user_params[:email] if user_params[:email]
+    user.local_currency = user_params[:local_currency] if user_params[:local_currency]
+    user.password = params[:password] if params[:password]
+
+    if user.save
       render json: user, status: :ok
     else
       render json: user.errors, status: :unprocessable_entity
@@ -37,10 +43,10 @@ class UsersController < ApplicationController
   private
 
   def user
-    User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :local_currency)
+    params.require(:user).permit(:name, :email, :local_currency)
   end
 end
