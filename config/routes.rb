@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :valuations, only: [:update]
   resources :currencies, only: [:index]
   resources :status, only: [:index]
+  resources :register, only: [:create]
 end
