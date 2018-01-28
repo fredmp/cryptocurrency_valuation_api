@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::API
 
-  # before_action :set_dev_credentials, :if => proc { Rails.env.development? }
   before_action :authenticate!
   after_action :set_authentiation_header!
 
@@ -24,11 +23,5 @@ class ApplicationController < ActionController::API
 
   def set_current_user(user)
     @current_user = user
-  end
-
-  def set_dev_credentials
-    unless ['register', 'login'].include?(controller_name) && action_name == 'create'
-      set_current_user(User.first)
-    end
   end
 end
