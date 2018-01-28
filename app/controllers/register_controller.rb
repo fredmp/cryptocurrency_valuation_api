@@ -1,4 +1,7 @@
 class RegisterController < ApplicationController
+
+  skip_before_action :authenticate!, only: [:create]
+
   def create
     if User.find_by(email: params[:email])
       render json: { message: "This email is already in use" }, status: :bad_request
@@ -7,8 +10,7 @@ class RegisterController < ApplicationController
 
     user = User.new(email: params[:email], password: params[:password])
     if user.save
-      result = JsonWebToken.encode(user_id: user.id)
-      response.headers['Authorization'] = result[:token]
+      set_current_user(user)
       render json: user, status: :created
     else
       render json: user.errors, status: :unprocessable_entity

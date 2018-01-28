@@ -1,12 +1,10 @@
 class JsonWebToken
   class << self
-    def encode(payload = {}, expiration = 1.hours.from_now)
-      token = JWT.encode(
-        payload.merge(exp: expiration.to_i),
+    def encode(user, expiration = 1.hours.from_now)
+      JWT.encode(
+        { user_id: user.id }.merge(exp: expiration.to_i),
         Rails.application.secrets.secret_key_base,
-        'HS256'
-      )
-      { token: token, expires_at: expiration }
+        'HS256')
     end
 
     def decode(token)
