@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     end
 
     user = User.new(user_params)
+    user.password = params[:password]
     if user.save
       set_current_user(user)
       render json: user, status: :created
