@@ -1,6 +1,6 @@
 class TrackedCurrenciesController < ApplicationController
   def index
-    render json: TrackedCurrency.all, with_currency_info: params[:full], status: :ok
+    render json: TrackedCurrency.where(user: current_user), with_currency_info: params[:full], status: :ok
   end
 
   def create
@@ -14,7 +14,7 @@ class TrackedCurrenciesController < ApplicationController
     end
 
     valuations = ValuationSetting.all.map { |vs| Valuation.new(valuation_setting: vs, value: 0) }
-    tracked = TrackedCurrency.new(currency: currency, valuations: valuations)
+    tracked = TrackedCurrency.new(currency: currency, user: current_user, valuations: valuations)
     if tracked.save
       render json: tracked, status: :created
     else
@@ -54,7 +54,7 @@ class TrackedCurrenciesController < ApplicationController
   end
 
   def ids
-    render json: TrackedCurrency.joins(:currency).pluck(:"currencies.id"), status: :ok
+    render json: TrackedCurrency.where(user: current_user).joins(:currency).pluck(:"currencies.id"), status: :ok
   end
 
   private
@@ -64,6 +64,6 @@ class TrackedCurrenciesController < ApplicationController
   end
 
   def tracked_currency
-    @tracked_currency ||= TrackedCurrency.find_by(currency: currency)
+    @tracked_currency ||= TrackedCurrency.find_by(currency: currency, user: current_user)
   end
 end

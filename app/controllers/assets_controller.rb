@@ -61,6 +61,6 @@ class AssetsController < ApplicationController
   end
 
   def asset
-    @asset ||= Asset.find_by(currency: currency)
+    @asset ||= Asset.find_by(currency: currency, user: current_user)
   end
 end

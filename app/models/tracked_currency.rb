@@ -5,18 +5,22 @@
 #  id          :integer          not null, primary key
 #  currency_id :integer
 #  notes       :string
+#  user_id     :integer
 #
 # Indexes
 #
 #  index_tracked_currencies_on_currency_id  (currency_id)
+#  index_tracked_currencies_on_user_id      (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (currency_id => currencies.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
 class TrackedCurrency < ApplicationRecord
   belongs_to :currency
+  belongs_to :user
   has_many :valuations, dependent: :destroy
 
   def expected_price
