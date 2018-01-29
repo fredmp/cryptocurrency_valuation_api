@@ -13,6 +13,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'pg'
 gem 'jwt'
+gem 'figaro'
 gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
