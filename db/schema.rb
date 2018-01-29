@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129191733) do
+ActiveRecord::Schema.define(version: 20180129192636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20180129191733) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_valuation_settings_on_user_id"
   end
 
   create_table "valuations", force: :cascade do |t|
@@ -95,6 +97,7 @@ ActiveRecord::Schema.define(version: 20180129191733) do
   add_foreign_key "currency_updates", "currencies"
   add_foreign_key "tracked_currencies", "currencies"
   add_foreign_key "tracked_currencies", "users"
+  add_foreign_key "valuation_settings", "users"
   add_foreign_key "valuations", "tracked_currencies"
   add_foreign_key "valuations", "valuation_settings"
 end
