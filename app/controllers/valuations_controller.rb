@@ -5,6 +5,11 @@ class ValuationsController < ApplicationController
       head :not_found
       return
     end
+    if valuation.tracked_currency.user != current_user
+      head :unauthorized
+      return
+    end
+
     valuation.value = params[:value]
     if valuation.save
       render json: valuation, status: :ok
