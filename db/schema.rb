@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128203102) do
+ActiveRecord::Schema.define(version: 20180129190632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(version: 20180128203102) do
     t.decimal "amount", precision: 25, scale: 2, default: "0.0"
     t.decimal "btc_value", precision: 25, scale: 6, default: "0.0"
     t.decimal "usd_value", precision: 25, scale: 2, default: "0.0"
+    t.bigint "user_id"
     t.index ["currency_id"], name: "index_assets_on_currency_id"
+    t.index ["user_id"], name: "index_assets_on_user_id"
   end
 
   create_table "currencies", force: :cascade do |t|
@@ -87,6 +89,7 @@ ActiveRecord::Schema.define(version: 20180128203102) do
   end
 
   add_foreign_key "assets", "currencies"
+  add_foreign_key "assets", "users"
   add_foreign_key "currency_updates", "currencies"
   add_foreign_key "tracked_currencies", "currencies"
   add_foreign_key "valuations", "tracked_currencies"

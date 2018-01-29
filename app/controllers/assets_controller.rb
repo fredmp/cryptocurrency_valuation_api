@@ -1,6 +1,6 @@
 class AssetsController < ApplicationController
   def index
-    render json: Asset.all, status: 200
+    render json: Asset.where(user: current_user), status: 200
   end
 
   def create
@@ -14,7 +14,7 @@ class AssetsController < ApplicationController
         return
       end
 
-      new_asset = Asset.new(currency: currency)
+      new_asset = Asset.new(currency: currency, user: current_user)
       if new_asset.save
         render json: new_asset, status: :created
       else
