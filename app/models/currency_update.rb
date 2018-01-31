@@ -30,4 +30,6 @@
 
 class CurrencyUpdate < ApplicationRecord
   belongs_to :currency
+
+  scope :old_entries, -> { CurrencyUpdate.where("created_at < ?", DateTime.current - 1.hour) }
 end

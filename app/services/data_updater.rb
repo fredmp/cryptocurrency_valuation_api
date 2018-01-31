@@ -4,7 +4,7 @@ require 'uri'
 
 class DataUpdater
 
-  def initialize(source_url, offset, limit = 5)
+  def initialize(source_url, offset, limit = 100)
     @source_url = source_url
     @offset = offset
     @limit = limit
@@ -87,7 +87,7 @@ class DataUpdater
   end
 
   def output(exception = nil)
-    result = { timestamp: DateTime.current.strftime("%F"), offset: @offset, limit: @limit }
+    result = { timestamp: DateTime.current.strftime("%F %T"), offset: @offset, limit: @limit }
     if exception
       result[:status] = :failure
       result[:data] = exception
