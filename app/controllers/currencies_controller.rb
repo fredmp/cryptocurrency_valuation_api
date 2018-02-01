@@ -3,7 +3,8 @@ class CurrenciesController < ApplicationController
   skip_before_action :authenticate!, only: ['batch_update', 'clean_up']
 
   def index
-    render json: Currency.limit(300), status: :ok
+    currencies = Currency.left_outer_joins(:updates).where.not(currency_updates: {id: nil}).limit(300)
+    render json: currencies, status: :ok
   end
 
   def batch_update
