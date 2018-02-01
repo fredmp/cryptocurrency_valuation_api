@@ -3,7 +3,7 @@ class CurrenciesController < ApplicationController
   skip_before_action :authenticate!, only: ['batch_update', 'clean_up']
 
   def index
-    currencies = Currency.left_outer_joins(:updates).where.not(currency_updates: {id: nil}).limit(300)
+    currencies = Currency.left_outer_joins(:updates).where.not(currency_updates: {id: nil}).order('currency_updates.market_cap DESC').limit(300)
     render json: currencies, status: :ok
   end
 
