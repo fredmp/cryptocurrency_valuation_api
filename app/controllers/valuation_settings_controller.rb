@@ -19,6 +19,33 @@ class ValuationSettingsController < ApplicationController
     end
   end
 
+  def batch_create
+    result = nil
+    ValuationSetting.transaction do
+      begin
+        settings = []
+        params[:batch].each do |setting_params|
+          new_valuation_setting = ValuationSetting.new(
+            name: setting_params[:name],
+            description: setting_params[:description],
+            max_value: setting_params[:max_value],
+            weight: setting_params[:weight],
+            user: current_user
+          )
+          new_valuation_setting.save!
+          TrackedCurrency.where(user: current_user).each do |t|
+            t.valuations.create(value: 0, valuation_setting: new_valuation_setting)
+          end
+          settings << new_valuation_setting
+        end
+        result = { json: settings, status: :created }
+      rescue => e
+        result = { json: { message: e.message }, status: :internal_server_error }
+      end
+    end
+    render result
+  end
+
   def update
     begin
       if valuation_setting.update(valuation_setting_params)

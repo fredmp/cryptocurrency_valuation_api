@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     post 'batch_update', on: :collection
     post 'clean_up', on: :collection
   end
-  resources :valuation_settings, only: [:index, :create, :update, :destroy], path: 'valuation-settings'
+  resources :valuation_settings, only: [:index, :create, :update, :destroy], path: 'valuation-settings' do
+    post 'batch_create', on: :collection
+  end
   resources :assets, only: [:index, :create, :update, :destroy], param: :symbol
   resources :valuations, only: [:update]
   resources :status, only: [:index]
