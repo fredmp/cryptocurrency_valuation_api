@@ -4,9 +4,9 @@
 #
 #  id          :integer          not null, primary key
 #  currency_id :integer
-#  amount      :decimal(25, 2)   default(0.0)
-#  btc_value   :decimal(25, 6)   default(0.0)
-#  usd_value   :decimal(25, 2)   default(0.0)
+#  amount      :decimal(25, 8)   default(0.0)
+#  btc_value   :decimal(25, 8)   default(0.0)
+#  usd_value   :decimal(25, 8)   default(0.0)
 #  user_id     :integer
 #
 # Indexes

@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129192636) do
+ActiveRecord::Schema.define(version: 20180202212552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "assets", force: :cascade do |t|
     t.bigint "currency_id"
-    t.decimal "amount", precision: 25, scale: 2, default: "0.0"
-    t.decimal "btc_value", precision: 25, scale: 6, default: "0.0"
-    t.decimal "usd_value", precision: 25, scale: 2, default: "0.0"
+    t.decimal "amount", precision: 25, scale: 8, default: "0.0"
+    t.decimal "btc_value", precision: 25, scale: 8, default: "0.0"
+    t.decimal "usd_value", precision: 25, scale: 8, default: "0.0"
     t.bigint "user_id"
     t.index ["currency_id"], name: "index_assets_on_currency_id"
     t.index ["user_id"], name: "index_assets_on_user_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180129192636) do
 
   create_table "currency_updates", force: :cascade do |t|
     t.integer "rank"
-    t.decimal "price", precision: 25, scale: 2
+    t.decimal "price", precision: 25, scale: 8
     t.decimal "volume_24h", precision: 25, scale: 2
     t.decimal "market_cap", precision: 25, scale: 2
     t.decimal "percent_change_1h"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20180129192636) do
     t.datetime "updated_at", null: false
     t.decimal "total_supply", precision: 25, scale: 2
     t.decimal "available_supply", precision: 25, scale: 2
-    t.decimal "reference_price", precision: 25, scale: 2
+    t.decimal "reference_price", precision: 25, scale: 8
     t.decimal "reference_market_cap", precision: 25, scale: 2
     t.decimal "reference_max_supply", precision: 25, scale: 2
     t.index ["currency_id"], name: "index_currency_updates_on_currency_id"

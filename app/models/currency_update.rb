@@ -4,7 +4,7 @@
 #
 #  id                   :integer          not null, primary key
 #  rank                 :integer
-#  price                :decimal(25, 2)
+#  price                :decimal(25, 8)
 #  volume_24h           :decimal(25, 2)
 #  market_cap           :decimal(25, 2)
 #  percent_change_1h    :decimal(, )
@@ -15,7 +15,7 @@
 #  updated_at           :datetime         not null
 #  total_supply         :decimal(25, 2)
 #  available_supply     :decimal(25, 2)
-#  reference_price      :decimal(25, 2)
+#  reference_price      :decimal(25, 8)
 #  reference_market_cap :decimal(25, 2)
 #  reference_max_supply :decimal(25, 2)
 #
