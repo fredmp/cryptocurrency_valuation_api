@@ -1,14 +1,16 @@
 FactoryBot.define do
   factory :valuation_setting do
 
+    user FactoryBot.build(:user)
+
     factory :innovation do
-      name "Innovation"
+      name 'Innovation'
       max_value 10
       weight 40
     end
 
     factory :wallet do
-      name "Wallet"
+      name 'Wallet'
       max_value 5
       weight 10
     end

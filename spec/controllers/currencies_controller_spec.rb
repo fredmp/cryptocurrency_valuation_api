@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe CurrenciesController, type: :controller do
 
+  before(:each) do
+    allow(controller).to receive(:current_user) { build(:user) }
+  end
+
   describe "GET #index" do
     it "returns http 200 and stored currencies" do
       btc = create(:btc)
