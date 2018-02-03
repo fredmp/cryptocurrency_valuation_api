@@ -1,8 +1,6 @@
 FactoryBot.define do
   factory :valuation_setting do
-
-    user FactoryBot.build(:user)
-
+    user
     factory :innovation do
       name 'Innovation'
       max_value 10
