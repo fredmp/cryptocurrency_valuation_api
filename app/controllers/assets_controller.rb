@@ -4,22 +4,20 @@ class AssetsController < ApplicationController
   end
 
   def create
-    def create
-      unless currency
-        render json: { message: "#{params['symbol']} does not exist" }, status: :bad_request
-        return
-      end
-      if asset
-        render json: { message: "Asset for #{params['symbol']} already exists" }, status: :bad_request
-        return
-      end
+    unless currency
+      render json: { message: "#{params['symbol']} does not exist" }, status: :bad_request
+      return
+    end
+    if asset
+      render json: { message: "Asset for #{params['symbol']} already exists" }, status: :bad_request
+      return
+    end
 
-      new_asset = Asset.new(currency: currency, user: current_user)
-      if new_asset.save
-        render json: new_asset, status: :created
-      else
-        render json: new_asset.errors, status: :unprocessable_entity
-      end
+    new_asset = Asset.new(currency: currency, user: current_user)
+    if new_asset.save
+      render json: new_asset, status: :created
+    else
+      render json: new_asset.errors, status: :unprocessable_entity
     end
   end
 
