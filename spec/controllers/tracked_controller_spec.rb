@@ -13,7 +13,7 @@ RSpec.describe TrackedCurrenciesController, type: :controller do
       get :ids
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to eq([tracked_currency.id].to_json)
+      expect(response.body).to eq([tracked_currency.currency.id].to_json)
     end
   end
 
