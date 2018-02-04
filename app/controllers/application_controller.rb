@@ -24,14 +24,18 @@ class ApplicationController < ActionController::API
   def current_user
     return @current_user if @current_user
     user = User.find(decoded_auth_token[:user_id]) if decoded_auth_token
-    @current_user = user if user && valid_token?(user)
+    @current_user = user if user && (fresh_token?(decoded_auth_token[:exp]) || stored_token?(user))
   end
 
   def set_current_user(user)
     @current_user = user
   end
 
-  def valid_token?(user)
+  def stored_token?(user)
     user.token == request.headers['Authorization']
+  end
+
+  def fresh_token?(expiration_in_miliseconds)
+    (Time.at(expiration_in_miliseconds) - 55.minutes) > Time.now
   end
 end
