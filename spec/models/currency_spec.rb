@@ -5,6 +5,11 @@ RSpec.describe Currency, type: :model do
   subject(:currency) { create(:btc) }
 
   it { is_expected.to have_many(:updates) }
+  it { is_expected.to respond_to(:external_id) }
+  it { is_expected.to respond_to(:name) }
+  it { is_expected.to respond_to(:symbol) }
+  it { is_expected.to respond_to(:max_supply) }
+  it { is_expected.to respond_to(:last_updated) }
 
   context 'with currency update attributes' do
     [

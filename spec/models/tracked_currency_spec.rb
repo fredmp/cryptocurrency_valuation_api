@@ -6,6 +6,7 @@ RSpec.describe TrackedCurrency, type: :model do
 
   it { is_expected.to belong_to(:currency) }
   it { is_expected.to have_many(:valuations) }
+  it { is_expected.to respond_to(:notes) }
 
   before(:each) do
     innovation = FactoryBot.create(:innovation)
