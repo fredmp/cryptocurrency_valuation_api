@@ -30,4 +30,10 @@ RSpec.describe TrackedCurrency, type: :model do
     end
   end
 
+  describe '#total_quota' do
+    it 'returns currency max price divided by total weight' do
+      expect(tracked.total_quota.to_f).to eq(210)
+    end
+  end
+
 end
