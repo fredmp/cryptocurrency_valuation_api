@@ -2,7 +2,7 @@
 
 This is the API part of a project that aims to provide tools to help users to create their own rules to evaluate cryptocurrency assets. It's currently under development.
 
-https://crypto-currency-valuation.herokuapp.com/
+https://cryptocurrency-valuation.herokuapp.com/
 
 ## Supported Versions
 
