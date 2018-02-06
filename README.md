@@ -1,24 +1,27 @@
-# README
+# CryptoCurrency Valuation Tool
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the API part of a project that aims to provide tools to help users to create their own rules to evaluate cryptocurrency assets. It's currently under development.
 
-Things you may want to cover:
+https://crypto-currency-valuation.herokuapp.com/
 
-* Ruby version
+## Supported Versions
 
-* System dependencies
+* Ruby 2.4.2
+* Rails 5.1.4
 
-* Configuration
+## Contributing
 
-* Database creation
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make sure it's covered by tests
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
 
-* Database initialization
+## Legal
 
-* How to run the test suite
+Cosmos Tecnologia &copy; 2017-2018
 
-* Services (job queues, cache servers, search engines, etc.)
+[@fredmp](https://twitter.com/fredmp)
 
-* Deployment instructions
-
-* ...
+[Licensed under the MIT license](https://opensource.org/licenses/mit-license.php)
