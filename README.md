@@ -2,7 +2,11 @@
 
 This is the API part of a project that aims to provide tools to help users to create their own rules to evaluate cryptocurrency assets. It's currently under development.
 
-https://cryptocurrency-valuation.herokuapp.com/
+Vue JS app repository: https://github.com/fredmp/cryptocurrency_valuation_spa
+
+Running app on heroku: https://cryptocurrency-valuation.herokuapp.com
+
+##### The data comes from the public [CoinMarketCap](https://coinmarketcap.com) API. It's updated every 15 minutes and respects the usage limits.
 
 ## Supported Versions
 
