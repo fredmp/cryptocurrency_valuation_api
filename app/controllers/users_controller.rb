@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authenticate!, only: [:create]
+  skip_before_action :authenticate!, only: [:create, :password_recovery, :redefine_password]
+  skip_after_action :set_authentication_header!, only: [:password_recovery, :redefine_password]
 
   def create
     if User.find_by(email: params[:email])
@@ -36,6 +37,37 @@ class UsersController < ApplicationController
 
     if user.save
       render json: user, status: :ok
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def password_recovery
+    begin
+      user = User.where(email: params[:email]).first
+      if user
+        token = JsonWebToken.encode(user, 15.minutes.from_now)
+        user.update_attribute(:token, token)
+        UserMailer.password_recovery(user).deliver if user
+      end
+    ensure
+      head :ok
+    end
+  end
+
+  def redefine_password
+    decoded_token = decoded_auth_token(params[:token])
+    user = User.find(decoded_token[:user_id]) if decoded_token
+
+    unless user && stored_token?(user, params[:token])
+      render json: { message: 'Invalid token' }, status: :unprocessable_entity
+      return
+    end
+
+    user.password = params[:password]
+    user.token = nil
+    if user.save
+      head :ok
     else
       render json: user.errors, status: :unprocessable_entity
     end
