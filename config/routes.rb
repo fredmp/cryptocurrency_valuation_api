@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   resources :assets, only: [:index, :create, :update, :destroy], param: :symbol
   resources :valuations, only: [:update]
   resources :status, only: [:index]
-  resources :users, only: [:create, :update]
+  resources :users, only: [:create, :update] do
+    post 'password_recovery', on: :collection
+    post 'redefine_password', on: :collection
+  end
 
   post 'login', to: 'auth#create', as: :login
   get 'logout', to: 'auth#destroy', as: :logout

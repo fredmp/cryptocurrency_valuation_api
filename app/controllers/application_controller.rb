@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
 
   before_action :authenticate!
-  after_action :set_authentiation_header!
+  after_action :set_authentication_header!
 
   private
 
@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
     render json: { error: 'Not Authorized' }, status: 401 unless current_user
   end
 
-  def set_authentiation_header!
+  def set_authentication_header!
     if current_user
       token = JsonWebToken.encode(current_user)
       current_user.update_attribute(:token, token)
@@ -17,8 +17,8 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def decoded_auth_token
-    @decoded_auth_token ||= (JsonWebToken.decode(request.headers['Authorization']) rescue nil)
+  def decoded_auth_token(token = request.headers['Authorization'])
+    @decoded_auth_token ||= (JsonWebToken.decode(token) rescue nil)
   end
 
   def current_user
@@ -31,8 +31,8 @@ class ApplicationController < ActionController::API
     @current_user = user
   end
 
-  def stored_token?(user)
-    user.token == request.headers['Authorization']
+  def stored_token?(user, received_token = request.headers['Authorization'])
+    user.token == received_token
   end
 
   def fresh_token?(expiration_in_miliseconds)
