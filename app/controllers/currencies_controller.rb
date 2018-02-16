@@ -1,10 +1,13 @@
 class CurrenciesController < ApplicationController
 
-  skip_before_action :authenticate!, only: ['batch_update', 'clean_up']
+  skip_before_action :authenticate!, only: ['batch_update', 'clean_up', 'popular']
 
   def index
-    currencies = Currency.left_outer_joins(:updates).where.not(currency_updates: {id: nil}).order('currency_updates.market_cap DESC').limit(300)
-    render json: currencies, status: :ok
+    render json: find(300), status: :ok
+  end
+
+  def popular
+    render json: find(20), status: :ok
   end
 
   def batch_update
@@ -42,5 +45,11 @@ class CurrenciesController < ApplicationController
     rescue
       render json: { error: 'An error has occured' }, status: :bad_request
     end
+  end
+
+  private
+
+  def find(limit)
+    Currency.left_outer_joins(:updates).where.not(currency_updates: {id: nil}).order('currency_updates.market_cap DESC').limit(limit)
   end
 end
