@@ -9,7 +9,6 @@ class ArticlesUpdater
     begin
       response = HTTP.headers('x-api-key' => @api_key).get(@source_url)
       result = response.parse
-
       titles = Article.limit(50).pluck(:title)
 
       if result['status'] == 'ok'

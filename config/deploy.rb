@@ -11,8 +11,8 @@ set :rbenv_ruby, '2.4.2'
 set :keep_releases, 2
 server 'cosmostecnologia.com.br', user: 'deployer', roles: [:web, :app, :db], primary: true
 
-# append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads'
-# append :linked_files, 'config/database.yml', 'config/secrets.yml'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads'
+append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/application.yml'
 
 # set :migration_role, :app
 # set :migration_servers, -> { primary(fetch(:migration_role)) }
@@ -49,6 +49,17 @@ set :assets_roles, []
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+namespace :figaro do
+  task :upload do
+    on roles(:all) do
+      execute "mkdir -p #{shared_path}/config"
+      upload! 'config/secrets.yml', "#{shared_path}/config/secrets.yml"
+      upload! 'config/database.yml', "#{shared_path}/config/database.yml"
+      upload! 'config/application.yml', "#{shared_path}/config/application.yml"
+    end
+  end
+end
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -90,6 +101,7 @@ namespace :deploy do
   end
 
   before :starting,     :check_revision
+  before :starting,     'figaro:upload'
   after  :finishing,    :cleanup
 end
 
