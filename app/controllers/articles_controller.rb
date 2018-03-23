@@ -13,7 +13,7 @@ class ArticlesController < ApplicationController
       return
     end
     
-    result = ArticlesUpdater.new("#{ENV['NEWS_API_URL']}#{ENV['NEWS_API_KEY']}").execute
+    result = ArticlesUpdater.new(ENV['NEWS_API_URL'], ENV['NEWS_API_KEY']).execute
 
     render json: result, status: (result[:status] == :success) ? :ok : :internal_server_error
   end

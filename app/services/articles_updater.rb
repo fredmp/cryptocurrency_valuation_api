@@ -1,23 +1,19 @@
-require 'net/http'
-require 'json'
-require 'uri'
-
 class ArticlesUpdater
 
-  def initialize(source_url)
+  def initialize(source_url, api_key)
     @source_url = source_url
+    @api_key = api_key
   end
 
   def execute
     begin
-      uri = URI(@source_url)
-      response = Net::HTTP.get(uri)
-      @result = JSON.parse(response)
+      response = HTTP.headers('x-api-key' => @api_key).get(@source_url)
+      result = response.parse
 
       titles = Article.limit(50).pluck(:title)
 
-      if @result['status'] == 'ok'
-        @result['articles'].each do |article_params|
+      if result['status'] == 'ok'
+        result['articles'].each do |article_params|
           create_article(article_params) unless titles.include?(article_params['title'])
         end
       end
