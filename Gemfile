@@ -32,4 +32,9 @@ group :development do
   gem 'bundler-audit'
   gem 'brakeman'
   gem 'annotate'
+  gem 'capistrano', '~> 3.10', require: false
+  gem 'capistrano-rails', '~> 1.3', require: false
+  gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano-bundler', '~> 1.3'
+  gem 'capistrano3-puma'
 end
