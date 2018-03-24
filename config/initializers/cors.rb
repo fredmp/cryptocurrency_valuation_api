@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'cryptocurrency-valuation.herokuapp.com', 'localhost:8080'
+    origins 'cryptocurrency-valuation.cosmostecnologia.com.br', 'cryptocurrency-valuation.herokuapp.com', 'localhost:8080'
 
     resource '*',
       headers: :any,
