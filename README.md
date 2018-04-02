@@ -4,7 +4,7 @@ This is the API part of a project that aims to provide tools to help users to cr
 
 Vue JS app repository: https://github.com/fredmp/cryptocurrency_valuation_spa
 
-Running app on heroku: https://cryptocurrency-valuation.herokuapp.com
+Running app: http://cryptocurrency-valuation.cosmostecnologia.com.br/
 
 ##### The data comes from the public [CoinMarketCap](https://coinmarketcap.com) API. It's updated every 15 minutes and respects the usage limits.
 
